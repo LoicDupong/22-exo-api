@@ -1,0 +1,111 @@
+body{
+    background-color: #faf3f4;
+    height: 100vh;
+    width: 100vw;
+}
+.wrapper{
+    position: relative;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &__input {
+        position: relative;
+        display: flex;
+        gap: 1rem;
+    }
+
+}
+
+form{
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .3s all ease-in-out;
+}
+
+input, .btn{
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.87);
+    box-shadow: 5px 5px 1px hsla(271, 69%, 15%, 0.274);
+    border: none;
+    border-radius: 5px;
+}
+
+input{
+    width: 100%;
+    position: relative;
+    text-align: right;
+}
+
+.label{
+    position: absolute;
+    top: -10px;
+    left: 4%;
+    z-index: 55;
+    color: white;
+    font-size: 14px;
+    padding: .3rem .5rem;
+    border-radius: 25px;
+
+    &--name{
+        background-color: rgb(24, 153, 65);
+    }
+    &--avatar{
+        background-color: rgb(90, 110, 228);
+    };
+}
+
+.input-wrapper input {
+    padding-right: 30px;
+}
+
+
+input:focus{
+    outline: 2px solid rgb(76, 175, 107);
+    box-shadow: 3px 3px 18px hsla(271, 69%, 15%, 0.5);
+}
+
+input::selection {
+    background: rgb(76, 175, 107);
+    color: #fff;
+  }
+
+.btn{
+    background-color: rgba(182, 250, 203, 0.747);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1rem 1.5rem;
+    transition: .3s all ease-in-out;
+    cursor: pointer;
+
+    &--delete{
+        color: red;
+        font-size: 22px;
+        cursor: pointer;
+        transition: .3s all ease-in-out;
+
+        &:hover{
+            color: rgb(110, 3, 3);
+        }
+    }
+}
+
+.btn:hover{
+    background-color: rgba(54, 75, 61, 0.747);
+    color: white;
+}
+
+h1 {
+    text-transform: uppercase;
+}

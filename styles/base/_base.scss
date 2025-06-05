@@ -6,19 +6,50 @@ body{
 .wrapper{
     position: relative;
     height: 100%;
-    max-width: 950px;
-    margin: auto;
-    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    gap: 2rem;
+
+    &__results{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+    }
+
+    &__interface{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     &__input {
         position: relative;
         display: flex;
         gap: 1rem;
+        transform: translateY(100%);
+    }
+
+    &__score{
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 1rem 1.3rem;
+        background-color: #fff;
+        box-shadow: 5px 5px 1px hsla(271, 69%, 15%, 0.274);
+        border-radius: 5px;
+        margin-top: 2rem;
+        transform: translateY(100%);   
     }
 
 }
@@ -83,24 +114,26 @@ input::selection {
   }
 
 .btn{
-    background-color: rgba(182, 250, 203, 0.747);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1rem 1.5rem;
     transition: .3s all ease-in-out;
     cursor: pointer;
+    color: white;
 
-    &--delete{
-        color: red;
-        font-size: 22px;
-        cursor: pointer;
-        transition: .3s all ease-in-out;
-
-        &:hover{
-            color: rgb(110, 3, 3);
-        }
+    &--interpol{
+        background-color: rgb(173, 25, 20);
     }
+    &--random-user{
+        background-color: #0a66c2;
+    }
+    &--next{
+        background-color: rgb(76, 175, 107);
+        width: fit-content;
+        margin-top: auto;
+    }
+
 }
 
 .btn:hover{
@@ -116,12 +149,23 @@ h1 {
     &__container{
         display: flex;
         gap: 2rem;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 1);
         border-radius: 15px;
         box-shadow: 3px 3px 6px rgb(0, 0, 0, 0.4);
+        transition: .5s all ease-in-out;
+        width: 50%;
+        max-height: 450px;
+        overflow: hidden;
     }
     &__img{
         flex-basis: 40%;
+        transition: .3s all ease-in-out;
+        position: relative;
+        z-index: 8;
+        left: 0;
+        top: 0;
+        transform: translate(0, 0);
+        
         img{
             height: 100%;
             width: 100%;
@@ -131,23 +175,29 @@ h1 {
         }
 
         &--user{
-            height: 300px;
+            min-height: 300px;
         }
     }
     &__infos{
+        z-index: 4;
         flex-basis: 60%;
         padding: 2rem;
         text-align: left;
-        
+        overflow: hidden;
+        transform: translateX(0);
+        transition: .5s .5s all ease-in-out;
     }
+
     &__name{
         font-weight: bold;
         font-size: 22px;
         margin-bottom: 1.5rem;
     }
+
     &__nationality{
         margin: .7rem 0;
     }
+
     &__warrant{
         p{
             border-radius: 10px;
@@ -159,8 +209,66 @@ h1 {
             text-transform: uppercase;
         }
     }
+
+    &__answer{
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: 30px;
+        margin-top: 3rem;
+        letter-spacing: 1px;
+        
+        &--interpol{
+            color: rgb(173, 25, 20);
+        }
+
+        &--linkedin{
+            color: #0a66c2;
+        }
+    }
 }
 
 .bold{
     font-weight: bold;
+}
+
+.initial{
+
+    .single__img{
+        height: 300px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+    }
+
+    img{
+        border-radius: 0;
+    }
+
+    .single__infos{
+        transform: translateX(-300%);
+    }
+
+    .single__container{
+        background-color: rgba(255,255,255,0);
+        box-shadow: none;
+    }
+}
+
+h1 {
+    font-size: 55px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .interpol{
+        font-size: 60px;
+    color: rgb(173, 25, 20);
+    }
+    .linkedin{
+        font-size: 60px;
+        color: #0a66c2;
+    }
 }

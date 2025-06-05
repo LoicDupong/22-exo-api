@@ -1,9 +1,11 @@
-const btnTestInterpol = document.querySelector('.btn--interpol');
-const btnTestRanUser = document.querySelector('.btn--random-user');
+const btnInterpol = document.querySelector('.btn--interpol');
+const btnLinkedin = document.querySelector('.btn--random-user');
+const btnNext = document.querySelector('.btn--next')
 const displayHTML = document.querySelector('.wrapper__results');
 const scoreHTML = document.querySelector('.wrapper__score');
 
 let score = 0;
+let canClick = true;
 
 let cleanRDI;
 let interpolData;
@@ -69,6 +71,8 @@ function displayInterpol(data, dataImg) {
                 <h3>Arrest Warrant:</h3>
                 <p>${data.arrest_warrants.map(g => g.charge).join(' | ')}</p>
             </div>
+            <div class="single__answer single__answer--interpol">Interpol</div>
+            <div class="btn btn--next">Next ➡</div>
         </div>
     </div>
     `
@@ -99,13 +103,18 @@ function displayRandomUser(data) {
             <div class="single__name">${(data.name.last).toUpperCase()} ${data.name.first}</div>
             <div class="single__sex"><span class="bold">Gender:</span> ${data.gender}</div>
             <div class="single__nationality"><span class="bold">Nationalities:</span> ${data.nat}</div>
+            <div class="single__answer single__answer--linkedin">Linkedin</div>
+            <div class="btn btn--next">Next ➡</div>
         </div>
     </div>
     `
 }
 
 async function Init() {
+    displayHTML.innerHTML = "";
+    displayHTML.classList.toggle('initial');
     scoreHTML.textContent = `Score : ${score}`
+
     const id = await getRandomInterpolIdAPI(); 
     await getInterpolAPI(id);
     await getInterpolImg(id);
@@ -115,33 +124,43 @@ async function Init() {
     () => displayInterpol(interpolData, cleanRDI)
     ];
     functionsArray[Math.floor(Math.random() * functionsArray.length)]();
-
+    canClick = true;
 }
 
 Init();
 
-btnTestInterpol.addEventListener('click', async (e) => {
+btnInterpol.addEventListener('click', (e) => {
+    if (!canClick) return;
+    canClick = false;
     const dataAttr = document.querySelector('.single__infos');
+    displayHTML.classList.toggle('initial');
     if (dataAttr.dataset.info == "interpol") {
         console.log("Nice guess");
         score++;
-        Init();
+        scoreHTML.textContent = `Score : ${score}`;
     } else {
         console.log("Wrong guess");
-        Init();
+    }
+});
+
+btnLinkedin.addEventListener('click', (e) => {
+    if (!canClick) return;
+    canClick = false;
+    const dataAttr = document.querySelector('.single__infos');
+    displayHTML.classList.toggle('initial');
+    if (dataAttr.dataset.info == "interpol") {
+        console.log("Wrong guess");
+    } else {
+        console.log("Nice guess");
+        score++;
+        scoreHTML.textContent = `Score : ${score}`;
     }
 });
 
 
-btnTestRanUser.addEventListener('click', async (e)=>{
-    const dataAttr = document.querySelector('.single__infos');
-    if (dataAttr.dataset.info == "interpol") {
-        console.log("Wrong guess");
+
+displayHTML.addEventListener('click', async (e) =>{
+    if (e.target.classList.contains('btn--next')){
         Init();
-    } else {
-        console.log("Nice guess"); 
-        score++;
-        Init();
-        
     }
 })

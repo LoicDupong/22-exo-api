@@ -184,6 +184,7 @@ h1 {
         padding: 2rem;
         text-align: left;
         overflow: hidden;
+        overflow-y: scroll;
         transform: translateX(0);
         transition: .5s .5s all ease-in-out;
     }

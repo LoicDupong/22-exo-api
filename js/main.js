@@ -16,7 +16,7 @@ let userData;
 async function getTranslateAPI(text) {
     try {
         const response = await fetch(
-            `https://translate.googleapis.com/translate_a/single?client=dict-chrome-ex&sl=auto&tl=en&dt=t&q=${encodeURIComponent(text)}`
+            `https://translate.googleapis.com/translate_a/single?client=dict-chrome-ex&sl=auto&tl=fr&dt=t&q=${encodeURIComponent(text)}`
         );
         const data = await response.json();
         const translated = data[0][0][0];

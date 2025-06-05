@@ -1,6 +1,6 @@
 const btnInterpol = document.querySelector('.btn--interpol');
 const btnLinkedin = document.querySelector('.btn--random-user');
-const btnNext = document.querySelector('.btn--next')
+const btnNext = document.querySelector('.btn--next');
 const displayHTML = document.querySelector('.wrapper__results');
 const scoreHTML = document.querySelector('.wrapper__score');
 
@@ -12,6 +12,19 @@ let interpolData;
 let interpolImg;
 let userData;
 
+// == Fetch Translation API
+async function getTranslateAPI(text) {
+    try {
+        const response = await fetch(
+            `https://translate.googleapis.com/translate_a/single?client=dict-chrome-ex&sl=auto&tl=en&dt=t&q=${encodeURIComponent(text)}`
+        );
+        const data = await response.json();
+        const translated = data[0][0][0];
+        return translated;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // == Fetch Interpol API Data of one data
 async function getInterpolAPI(id) {
@@ -54,11 +67,12 @@ async function getRandomInterpolIdAPI() {
 }
 
 // == Display Data of Interpol
-function displayInterpol(data, dataImg) {
+async function displayInterpol(data, dataImg) {
     displayHTML.innerHTML = "";
     let nationality;
     data.nationalities ? nationality = data.nationalities.join(', ') : "";
-
+    const arrestWarrant = data.arrest_warrants.map(g => g.charge).join(' | ');
+    const transArrestWarrant = await getTranslateAPI(arrestWarrant)
 
     displayHTML.innerHTML += `
     <div class="single__container">
@@ -69,7 +83,7 @@ function displayInterpol(data, dataImg) {
             <div class="single__nationality"><span class="bold">Nationalities:</span> ${nationality}</div>
             <div class="single__warrant">
                 <h3>Arrest Warrant:</h3>
-                <p>${data.arrest_warrants.map(g => g.charge).join(' | ')}</p>
+                <p>${transArrestWarrant}</p>
             </div>
             <div class="single__answer single__answer--interpol">Interpol</div>
             <div class="btn btn--next">Next ➡</div>

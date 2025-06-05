@@ -1,10 +1,15 @@
 const btnTestInterpol = document.querySelector('.btn--interpol');
 const btnTestRanUser = document.querySelector('.btn--random-user');
 const displayHTML = document.querySelector('.wrapper__results');
+const scoreHTML = document.querySelector('.wrapper__score');
+
+let score = 0;
+
 let cleanRDI;
 let interpolData;
 let interpolImg;
 let userData;
+
 
 // == Fetch Interpol API Data of one data
 async function getInterpolAPI(id) {
@@ -56,10 +61,10 @@ function displayInterpol(data, dataImg) {
     displayHTML.innerHTML += `
     <div class="single__container">
         <div class="single__img"><img src="https://ws-public.interpol.int/notices/v1/red/${dataImg}/images/${interpolImg}" alt="picture interpole"></div>
-        <div class="single__infos">
+        <div class="single__infos" data-info="interpol">
             <div class="single__name">${data.name} ${(data.forename).toLowerCase()}</div>
             <div class="single__sex"><span class="bold">Gender:</span> ${data.sex_id}</div>
-            <div class="single__nationality"><span class="bold">Nationalities:</span> ${data.nationalities.join(', ')}</div>
+            <div class="single__nationality"><span class="bold">Nationalities:</span> ${nationality}</div>
             <div class="single__warrant">
                 <h3>Arrest Warrant:</h3>
                 <p>${data.arrest_warrants.map(g => g.charge).join(' | ')}</p>
@@ -100,6 +105,7 @@ function displayRandomUser(data) {
 }
 
 async function Init() {
+    scoreHTML.textContent = `Score : ${score}`
     const id = await getRandomInterpolIdAPI(); 
     await getInterpolAPI(id);
     await getInterpolImg(id);
@@ -112,14 +118,27 @@ async function Init() {
 Init();
 
 btnTestInterpol.addEventListener('click', async (e) => {
-    const id = await getRandomInterpolIdAPI(); 
-    await getInterpolAPI(id);
-    await getInterpolImg(id);
-    displayInterpol(interpolData, cleanRDI);
+    const dataAttr = document.querySelector('.single__infos');
+    if (dataAttr.dataset.info == "interpol") {
+        console.log("Nice guess");
+        score++;
+        Init();
+    } else {
+        console.log("Wrong guess");
+        Init();
+    }
 });
 
 
 btnTestRanUser.addEventListener('click', async (e)=>{
-    await getRandomUserAPI();
-    displayRandomUser(userData);
+    const dataAttr = document.querySelector('.single__infos');
+    if (dataAttr.dataset.info == "interpol") {
+        console.log("Wrong guess");
+        Init();
+    } else {
+        console.log("Nice guess"); 
+        score++;
+        Init();
+        
+    }
 })

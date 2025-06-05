@@ -110,9 +110,12 @@ async function Init() {
     await getInterpolAPI(id);
     await getInterpolImg(id);
     await getRandomUserAPI();
-    const functionsArray = [displayRandomUser(userData),displayInterpol(interpolData, cleanRDI)]
+    const functionsArray = [
+    () => displayRandomUser(userData),
+    () => displayInterpol(interpolData, cleanRDI)
+    ];
+    functionsArray[Math.floor(Math.random() * functionsArray.length)]();
 
-    functionsArray[Math.floor(Math.random() * functionsArray.length)];
 }
 
 Init();

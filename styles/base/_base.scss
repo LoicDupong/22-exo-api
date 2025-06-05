@@ -6,9 +6,11 @@ body{
 .wrapper{
     position: relative;
     height: 100%;
+    max-width: 950px;
     margin: auto;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -108,4 +110,57 @@ input::selection {
 
 h1 {
     text-transform: uppercase;
+}
+
+.single{
+    &__container{
+        display: flex;
+        gap: 2rem;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 3px 3px 6px rgb(0, 0, 0, 0.4);
+    }
+    &__img{
+        flex-basis: 40%;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        &--user{
+            height: 300px;
+        }
+    }
+    &__infos{
+        flex-basis: 60%;
+        padding: 2rem;
+        text-align: left;
+        
+    }
+    &__name{
+        font-weight: bold;
+        font-size: 22px;
+        margin-bottom: 1.5rem;
+    }
+    &__nationality{
+        margin: .7rem 0;
+    }
+    &__warrant{
+        p{
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+            padding: 0.5rem 1rem;
+        }
+
+        span{
+            text-transform: uppercase;
+        }
+    }
+}
+
+.bold{
+    font-weight: bold;
 }

@@ -273,3 +273,22 @@ h1 {
         color: #0a66c2;
     }
 }
+
+
+@media screen and (max-width:960px) {
+    .single__container{
+        flex-direction: column;
+        width: 80%;
+        overflow: scroll;
+    }
+
+    .single__infos{
+        overflow: unset;
+    }
+
+    .wrapper__score{
+        margin-top: 0;
+    }
+
+
+}
